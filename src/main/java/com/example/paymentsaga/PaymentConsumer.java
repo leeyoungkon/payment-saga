@@ -8,19 +8,19 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 @Component
-public class PaymentCommandConsumer {
+public class PaymentConsumer {
 
     private final KafkaTemplate<String, SagaMessage> kafkaTemplate;
 
-    public PaymentCommandConsumer(KafkaTemplate<String, SagaMessage> kafkaTemplate) {
+    public PaymentConsumer(KafkaTemplate<String, SagaMessage> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    @KafkaListener(topics = "payment-commands", groupId = "payment-service-group",
+    @KafkaListener(topics = "stock-events", groupId = "payment-service-group",
             containerFactory = "kafkaListenerContainerFactory")
     public void consume(SagaMessage message) {
 
-        if ("ProcessPaymentCommand".equals(message.getEventType())) {
+        if ("StockReserved".equals(message.getEventType())) {
             boolean success = message.getAmount().compareTo(new BigDecimal("50000")) <= 0;
 
             if (success) {
