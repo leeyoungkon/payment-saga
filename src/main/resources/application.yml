@@ -3,7 +3,7 @@ server:
 
 spring:
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: my-cluster-kafka-bootstrap:9092
     consumer:
       group-id: payment-service-group
       auto-offset-reset: earliest
