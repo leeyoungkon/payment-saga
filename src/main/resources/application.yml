@@ -14,3 +14,13 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+app:
+  kafka:
+    topics:
+      stock-events: stock-events
+      payment-events: payment-events
+    consumer:
+      group-id: payment-service-group
+  payment:
+    limit: 50000
